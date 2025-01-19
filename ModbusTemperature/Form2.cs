@@ -92,7 +92,7 @@ namespace ModbusTemperature
             temperatureTimer.Interval = interval;
             temperatureTimer.Tick += TemperatureTimer_Tick;
             startTime = DateTime.Now;
-            endTime = startTime.AddHours(8);
+            endTime = startTime.AddSeconds(8);
             StartReadingTemperature();
             label10.Text = $"date :  {startTime.ToString("yyyy MMM dd")}";
             label11.Text = $"Start Running : {startTime.ToString("HH:mm:ss")}";
@@ -115,78 +115,79 @@ namespace ModbusTemperature
         {
             try
             {
-                //using (SerialPort port = new("COM4"))
-                //{
-                //    port.BaudRate = 9600; // Sesuaikan dengan baud rate perangkat kamu
-                //    port.DataBits = 8;
-                //    port.Parity = Parity.None;
-                //    port.StopBits = StopBits.One;
-                //    port.ReadTimeout = 3000;
-                //    port.WriteTimeout = 3000;
-                //    port.Open();
-                //    if (!port.IsOpen) return;
-
-                //    var master = factory.CreateRtuMaster(port);
-                //    byte slaveAddress = 1; // ID Modbus perangkat PT100
-                //    ushort startAddress = 0; // Alamat register pertama untuk suhu
-                //    ushort numberOfPoints = 1;
-                //    ushort[] response = master.ReadHoldingRegisters(slaveAddress, startAddress, numberOfPoints);
-                //    double temperature = ConvertRegisterToTemperature(response[0]);
-
-
-                //    foreach (var serialNumber in masterModels)
-                //    {
-                //        ModelDetail detail = new ModelDetail(serialNumber.SerialNumber, temperature);
-                //        detail.SaveDataDetail();
-                //    }
-                //    var details = ModelDetail.GetModelDetailsBySerialNumber(masterModels.First().SerialNumber);
-                //    details = details.TakeLast(10).ToList();
-
-                //    LoadDataDetailToChart(details, masterModels.First());
-                //    textBox1.Text = $"{temperature} °C";
-
-                Random rnd = new Random();
-                double temperature = rnd.NextDouble();
-                temperature = temperature * 100;
-                //Save temperature for each scanned SerialNumber
-
-                foreach (var serialNumber in masterModels)
+                using (SerialPort port = new("COM11"))
                 {
-                    ModelDetail detail = new ModelDetail(serialNumber.SerialNumber, temperature);
-                    detail.SaveDataDetail();
+                    port.BaudRate = 9600; // Sesuaikan dengan baud rate perangkat kamu
+                    port.DataBits = 8;
+                    port.Parity = Parity.None;
+                    port.StopBits = StopBits.One;
+                    port.ReadTimeout = 3000;
+                    port.WriteTimeout = 3000;
+                    port.Open();
+                    if (!port.IsOpen) return;
+
+                    var master = factory.CreateRtuMaster(port);
+                    byte slaveAddress = 1; // ID Modbus perangkat PT100
+                    ushort startAddress = 0; // Alamat register pertama untuk suhu
+                    ushort numberOfPoints = 1;
+                    ushort[] response = master.ReadHoldingRegisters(slaveAddress, startAddress, numberOfPoints);
+                    double temperature = ConvertRegisterToTemperature(response[0]);
+
+
+                    foreach (var serialNumber in masterModels)
+                    {
+                        ModelDetail detail = new ModelDetail(serialNumber.SerialNumber, temperature);
+                        detail.SaveDataDetail();
+                    }
+                    var details = ModelDetail.GetModelDetailsBySerialNumber(masterModels.First().SerialNumber);
+                    details = details.TakeLast(10).ToList();
+
+                    LoadDataDetailToChart(details, masterModels.First());
+                    textBox1.Text = $"{temperature} °C";
+
+                    //Random rnd = new Random();
+                    //double temperature = rnd.NextDouble();
+                    //temperature = temperature * 100;
+                    ////Save temperature for each scanned SerialNumber
+
+                    //foreach (var serialNumber in masterModels)
+                    //{
+                    //    ModelDetail detail = new ModelDetail(serialNumber.SerialNumber, temperature);
+                    //    detail.SaveDataDetail();
+                    //}
+                    //var details = ModelDetail.GetModelDetailsBySerialNumber(masterModels.First().SerialNumber);
+                    ////                details = details.TakeLast(10).ToList();
+                    //LoadDataDetailToChart(details, masterModels.First());
+                    //textBox1.Text = $"{temperature} °C";
+                    //    //Tampilkan suhu di kontrol TextBox atau Label
+                    //   ModelDetail detail = new ModelDetail(masterModel.SerialNumber, temperature);
+                    //    detail.SaveDataDetail();
+                    //    textBox3.Text = $"Temperature : {temperature} °C";
+                    //    //ModelTemperature.SaveTemperature(temperature);
+                    //}
+                    //    Random rnd = new Random();
+                    //double temperature = rnd.NextDouble();
+                    //temperature = temperature * 100;
+                    ////Save temperature for each scanned SerialNumber
+
+                    //foreach (var serialNumber in masterModels)
+                    //{
+                    //    ModelDetail detail = new ModelDetail(serialNumber.SerialNumber, temperature);
+                    //    detail.SaveDataDetail();
+                    //}
+                    //var details = ModelDetail.GetModelDetailsBySerialNumber(masterModels.First().SerialNumber);
+                    ////                details = details.TakeLast(10).ToList();
+                    //LoadDataDetailToChart(details, masterModels.First());
+                    //textBox1.Text = $"{temperature} °C";
+
+
+                    // Load the latest temperature data for the first SerialNumber
+                    //var details = ModelDetail.GetModelDetailsBySerialNumber(masterModels.First().SerialNumber);
+                    //details = details.TakeLast(10).ToList();
+                    //LoadDataDetailToChart(details);
+                    //textBox3.Text = $"{temperature} °C";
+
                 }
-                var details = ModelDetail.GetModelDetailsBySerialNumber(masterModels.First().SerialNumber);
-                //                details = details.TakeLast(10).ToList();
-                LoadDataDetailToChart(details, masterModels.First());
-                textBox1.Text = $"{temperature} °C";
-                //    //Tampilkan suhu di kontrol TextBox atau Label
-                //   ModelDetail detail = new ModelDetail(masterModel.SerialNumber, temperature);
-                //    detail.SaveDataDetail();
-                //    textBox3.Text = $"Temperature : {temperature} °C";
-                //    //ModelTemperature.SaveTemperature(temperature);
-                //}
-                //    Random rnd = new Random();
-                //double temperature = rnd.NextDouble();
-                //temperature = temperature * 100;
-                ////Save temperature for each scanned SerialNumber
-
-                //foreach (var serialNumber in masterModels)
-                //{
-                //    ModelDetail detail = new ModelDetail(serialNumber.SerialNumber, temperature);
-                //    detail.SaveDataDetail();
-                //}
-                //var details = ModelDetail.GetModelDetailsBySerialNumber(masterModels.First().SerialNumber);
-                ////                details = details.TakeLast(10).ToList();
-                //LoadDataDetailToChart(details, masterModels.First());
-                //textBox1.Text = $"{temperature} °C";
-
-
-                // Load the latest temperature data for the first SerialNumber
-                //var details = ModelDetail.GetModelDetailsBySerialNumber(masterModels.First().SerialNumber);
-                //details = details.TakeLast(10).ToList();
-                //LoadDataDetailToChart(details);
-                //textBox3.Text = $"{temperature} °C";
-            
             }
             catch (IOException ex)
             {
@@ -270,25 +271,28 @@ namespace ModbusTemperature
         }
         void SaveDataPDF(List<ModelDetail> _dt)
         {
-            setChartSerialNumberTitle(masterModels[0]);
-            var groupedData = GroupingDataByTime(_dt);
-            string[] sourceImages = new string[groupedData.Count];
-            string basePath = @"C:\Users\USER\Desktop\PDF\";
-            string baseSN = masterModels[0].SerialNumber.Replace(@"\", @"%%").Replace(@"/","%%");
-            for (int i = 0; i < groupedData.Count; i++)
+            foreach (var master in masterModels)
             {
-                string imgPath = sourceImages[i] = Path.Combine(basePath, $"{baseSN}-{i}.jpg");
-                setupChart(groupedData[i], masterModels[0]);
-                LoadChartPoints(groupedData[i]);
-                if (File.Exists(imgPath))
-                    File.Delete(imgPath);
+                setChartSerialNumberTitle(master);
+                var groupedData = GroupingDataByTime(_dt);
+                string[] sourceImages = new string[groupedData.Count];
+                string basePath = @"C:\Users\frans\source\repos\PDF\";
+                string baseSN = master.SerialNumber.Replace(@"\", @"%%").Replace(@"/", "%%");
+                for (int i = 0; i < groupedData.Count; i++)
+                {
+                    string imgPath = sourceImages[i] = Path.Combine(basePath, $"{baseSN}-{i}.jpg");
+                    setupChart(groupedData[i], master);
+                    LoadChartPoints(groupedData[i]);
+                    if (File.Exists(imgPath))
+                        File.Delete(imgPath);
 
-                chart1.SaveImage(Path.Combine(basePath, $"{baseSN}-{i}.jpg"), ChartImageFormat.Jpeg);
+                    chart1.SaveImage(Path.Combine(basePath, $"{baseSN}-{i}.jpg"), ChartImageFormat.Jpeg);
 
+                }
+                PDFUtility.MasterModelToPDF(sourceImages, Path.Combine(basePath, $"{master.badgeId}_{master.SerialNumber}_{master.RecordedAt.ToString("yyyy-MM-dd")}.pdf"));
+                for (int i = 0; i < sourceImages.Length; i++)
+                    File.Delete(sourceImages[i]);
             }
-            PDFUtility.MasterModelToPDF(sourceImages, Path.Combine(basePath, $"{@masterModels[0].badgeId}_{@masterModels[0].RecordedAt.ToString("yyyy-MM-dd")}.pdf"));
-            for (int i = 0; i < sourceImages.Length; i++)
-                File.Delete(sourceImages[i]);
         }
         private void chart1_Click(object sender, EventArgs e)
         {
