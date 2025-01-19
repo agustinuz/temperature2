@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using ClosedXML.Excel;
+using Microsoft.Data.SqlClient;
 using ModbusTemperature.Model;
 using ModbusTemperature.Utility;
 using NModbus;
@@ -56,7 +57,7 @@ namespace ModbusTemperature
             label12.Text = $"Estimation Stop  : {endTime.ToString("HH:mm:ss")}";
             setupChart(details, masterModels[0]);
             LoadChartPoints(details);
-            
+
         }
         void LoadChartPoints(List<ModelDetail> details)
         {
@@ -83,6 +84,7 @@ namespace ModbusTemperature
             for (int i = 0; i < serialLabels.Length; i++)
             {
                 serialLabels[i].Text = masterModels.Length > i ? masterModels[i].SerialNumber : "";
+                serialLabels[i].Enabled = masterModels.Length > i;
             }
             if (!startRunning)
             {
@@ -236,10 +238,10 @@ namespace ModbusTemperature
                 //                chart1.ChartAreas[0].AxisX.Maximum = startTime.AddMinutes(60).ToOADate();
             }
         }
-        private void LoadDataDetailToChart(List<ModelDetail> dataDetails,ModelMaster master)
+        private void LoadDataDetailToChart(List<ModelDetail> dataDetails, ModelMaster master)
         {
             var details = dataDetails;
-            setupChart(details,master);
+            setupChart(details, master);
             LoadChartPoints(details);
         }
 
@@ -265,9 +267,9 @@ namespace ModbusTemperature
         }
         List<List<ModelDetail>> GroupingDataByTime(List<ModelDetail> dataDetails)
         {
-//            string dateFormat = "";//dataDetails.Count <= 60 ? "yyyy-MM-dd HH:mm:00" : "yyyy-MM-dd HH:00:00";
-            var dataGroup = dataDetails.GroupBy(x => new { time = x.RecordedAt.ToString("yyyy-MM-dd HH"), minute =x.RecordedAt.Minute > 30} )  ;
-            return interval <= 30 * 60 * 1000 && dataDetails.Count> 10 ?  dataGroup.Select(x=>x.ToList()).ToList() :new List<List<ModelDetail>>() { dataDetails };
+            //            string dateFormat = "";//dataDetails.Count <= 60 ? "yyyy-MM-dd HH:mm:00" : "yyyy-MM-dd HH:00:00";
+            var dataGroup = dataDetails.GroupBy(x => new { time = x.RecordedAt.ToString("yyyy-MM-dd HH"), minute = x.RecordedAt.Minute > 30 });
+            return interval <= 30 * 60 * 1000 && dataDetails.Count > 10 ? dataGroup.Select(x => x.ToList()).ToList() : new List<List<ModelDetail>>() { dataDetails };
         }
         void SaveDataPDF(List<ModelDetail> _dt)
         {
@@ -311,6 +313,50 @@ namespace ModbusTemperature
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void GenerateReportSN(object sender, EventArgs e)
+        {
+            LinkLabel linklabel = (LinkLabel)sender;
+            var dt = ModelDetail.GetModelDetailsBySerialNumber(linklabel.Text);
+            var dataGroup = dt.GroupBy(x => new { time = x.RecordedAt.ToString("yyyy-MM-dd HH") }).ToArray();
+            string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BurnInReport.xlsx");
+            using (var wb = new XLWorkbook(fileName))
+            {
+                IXLWorksheet worksheet = wb.Worksheet(1);
+                worksheet.Cells("B3").Value = startTime.ToString("MM/dd/yyyy HH:mm:ss");
+                worksheet.Cells("B4").Value = endTime.ToString("MM/dd/yyyy HH:mm:ss");
+                worksheet.Cells("B5").Value = badgeId;
+                worksheet.Cells("B7").Value = linklabel.Text;
+                worksheet.Cells("B8").Value = $"{(endTime - startTime).TotalHours.ToString("0.00")}";
+                for (int i = 0, j = 14; i < dataGroup.Length || j <= 21; i++, j++)
+                {
+                    if (dataGroup.Length > i)
+                    {
+                        var group = dataGroup[i];
+                        string label = dataGroup[i].Select(x => x.RecordedAt).First().ToString("HH:mm");
+                        double avgTemp = dataGroup[i].Select(x => x.TemperatureData).Average();
+                        worksheet.Cells($"B{j}").Value = label;
+                        worksheet.Cells($"C{j}").Value = avgTemp.ToString("0.00");
+                    }
+                    else
+                    {
+                        worksheet.Cells($"B{j}").Value = "";
+                        worksheet.Cells($"C{j}").Value = "";
+                    }
+
+                }
+                string basePath = @"C:\Users\frans\source\repos\PDF\";
+                string saveFile = $"Excel_{linklabel.Text}_{badgeId}.xlsx";
+                int index = 2;
+                while (File.Exists(Path.Combine(basePath, saveFile)))
+                {
+                    saveFile = $"Excel_{linklabel.Text}_{badgeId}_{index}.xlsx";
+                    index = index + 1;
+                }
+                wb.SaveAs(Path.Combine(basePath,saveFile ));
+            }
+            MessageBox.Show("Generating Report Success");
         }
     }
 }

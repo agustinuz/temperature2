@@ -81,7 +81,7 @@
             series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
             series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
             chart1.Series.Add(series1);
-            chart1.Size = new Size(964, 616);
+            chart1.Size = new Size(917, 616);
             chart1.TabIndex = 6;
             chart1.Text = "Chart Temperature Data";
             chart1.TextAntiAliasingQuality = System.Windows.Forms.DataVisualization.Charting.TextAntiAliasingQuality.Normal;
@@ -109,9 +109,9 @@
             panel3.BackColor = Color.WhiteSmoke;
             panel3.Controls.Add(textBox1);
             panel3.Controls.Add(chart1);
-            panel3.Location = new Point(243, 15);
+            panel3.Location = new Point(290, 15);
             panel3.Name = "panel3";
-            panel3.Size = new Size(964, 616);
+            panel3.Size = new Size(917, 616);
             panel3.TabIndex = 12;
             // 
             // textBox1
@@ -133,7 +133,7 @@
             panel2.Dock = DockStyle.Left;
             panel2.Location = new Point(5, 5);
             panel2.Name = "panel2";
-            panel2.Size = new Size(225, 658);
+            panel2.Size = new Size(261, 658);
             panel2.TabIndex = 11;
             // 
             // panel4
@@ -142,7 +142,7 @@
             panel4.Controls.Add(label3);
             panel4.Location = new Point(0, 0);
             panel4.Name = "panel4";
-            panel4.Size = new Size(222, 83);
+            panel4.Size = new Size(258, 83);
             panel4.TabIndex = 7;
             // 
             // label3
@@ -158,7 +158,7 @@
             // button1
             // 
             button1.Anchor = AnchorStyles.Top;
-            button1.Location = new Point(55, 562);
+            button1.Location = new Point(79, 562);
             button1.Name = "button1";
             button1.Size = new Size(91, 40);
             button1.TabIndex = 10;
@@ -181,120 +181,120 @@
             panel5.Controls.Add(label13);
             panel5.Location = new Point(0, 82);
             panel5.Name = "panel5";
-            panel5.Size = new Size(222, 241);
+            panel5.Size = new Size(258, 241);
             panel5.TabIndex = 8;
             // 
             // linkLabel8
             // 
             linkLabel8.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             linkLabel8.AutoEllipsis = true;
-            linkLabel8.AutoSize = true;
             linkLabel8.BackColor = Color.DodgerBlue;
             linkLabel8.Location = new Point(7, 175);
             linkLabel8.Name = "linkLabel8";
-            linkLabel8.Size = new Size(44, 15);
+            linkLabel8.Size = new Size(244, 15);
             linkLabel8.TabIndex = 22;
             linkLabel8.TabStop = true;
             linkLabel8.Text = "Serial 8";
             linkLabel8.TextAlign = ContentAlignment.MiddleCenter;
+            linkLabel8.Click += GenerateReportSN;
             // 
             // linkLabel7
             // 
             linkLabel7.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             linkLabel7.AutoEllipsis = true;
-            linkLabel7.AutoSize = true;
             linkLabel7.BackColor = Color.DodgerBlue;
             linkLabel7.Location = new Point(7, 160);
             linkLabel7.Name = "linkLabel7";
-            linkLabel7.Size = new Size(44, 15);
+            linkLabel7.Size = new Size(244, 15);
             linkLabel7.TabIndex = 21;
             linkLabel7.TabStop = true;
             linkLabel7.Text = "Serial 7";
             linkLabel7.TextAlign = ContentAlignment.MiddleCenter;
+            linkLabel7.Click += GenerateReportSN;
             // 
             // linkLabel6
             // 
             linkLabel6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             linkLabel6.AutoEllipsis = true;
-            linkLabel6.AutoSize = true;
             linkLabel6.BackColor = Color.DodgerBlue;
             linkLabel6.Location = new Point(7, 145);
             linkLabel6.Name = "linkLabel6";
-            linkLabel6.Size = new Size(44, 15);
+            linkLabel6.Size = new Size(244, 15);
             linkLabel6.TabIndex = 20;
             linkLabel6.TabStop = true;
             linkLabel6.Text = "Serial 6";
             linkLabel6.TextAlign = ContentAlignment.MiddleCenter;
+            linkLabel6.Click += GenerateReportSN;
             // 
             // linkLabel5
             // 
             linkLabel5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             linkLabel5.AutoEllipsis = true;
-            linkLabel5.AutoSize = true;
             linkLabel5.BackColor = Color.DodgerBlue;
             linkLabel5.Location = new Point(7, 130);
             linkLabel5.Name = "linkLabel5";
-            linkLabel5.Size = new Size(44, 15);
+            linkLabel5.Size = new Size(244, 15);
             linkLabel5.TabIndex = 19;
             linkLabel5.TabStop = true;
             linkLabel5.Text = "Serial 5";
             linkLabel5.TextAlign = ContentAlignment.MiddleCenter;
+            linkLabel5.Click += GenerateReportSN;
             // 
             // linkLabel4
             // 
             linkLabel4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             linkLabel4.AutoEllipsis = true;
-            linkLabel4.AutoSize = true;
             linkLabel4.BackColor = Color.DodgerBlue;
             linkLabel4.Location = new Point(7, 115);
             linkLabel4.Name = "linkLabel4";
-            linkLabel4.Size = new Size(44, 15);
+            linkLabel4.Size = new Size(244, 15);
             linkLabel4.TabIndex = 18;
             linkLabel4.TabStop = true;
             linkLabel4.Text = "Serial 4";
             linkLabel4.TextAlign = ContentAlignment.MiddleCenter;
+            linkLabel4.Click += GenerateReportSN;
             // 
             // linkLabel3
             // 
             linkLabel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             linkLabel3.AutoEllipsis = true;
-            linkLabel3.AutoSize = true;
             linkLabel3.BackColor = Color.DodgerBlue;
             linkLabel3.Location = new Point(7, 100);
             linkLabel3.Name = "linkLabel3";
-            linkLabel3.Size = new Size(44, 15);
+            linkLabel3.Size = new Size(244, 15);
             linkLabel3.TabIndex = 17;
             linkLabel3.TabStop = true;
             linkLabel3.Text = "Serial 3";
             linkLabel3.TextAlign = ContentAlignment.MiddleCenter;
+            linkLabel3.Click += GenerateReportSN;
             // 
             // linkLabel2
             // 
             linkLabel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             linkLabel2.AutoEllipsis = true;
-            linkLabel2.AutoSize = true;
             linkLabel2.BackColor = Color.DodgerBlue;
             linkLabel2.Location = new Point(7, 85);
             linkLabel2.Name = "linkLabel2";
-            linkLabel2.Size = new Size(44, 15);
+            linkLabel2.Size = new Size(244, 15);
             linkLabel2.TabIndex = 16;
             linkLabel2.TabStop = true;
             linkLabel2.Text = "Serial 2";
             linkLabel2.TextAlign = ContentAlignment.MiddleCenter;
+            linkLabel2.Click += GenerateReportSN;
             // 
             // linkLabel1
             // 
             linkLabel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            linkLabel1.AutoSize = true;
             linkLabel1.BackColor = Color.DodgerBlue;
             linkLabel1.LinkColor = Color.FromArgb(0, 0, 192);
-            linkLabel1.Location = new Point(7, 68);
+            linkLabel1.Location = new Point(7, 70);
             linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(44, 15);
+            linkLabel1.Size = new Size(244, 15);
             linkLabel1.TabIndex = 15;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "Serial 1";
             linkLabel1.TextAlign = ContentAlignment.MiddleCenter;
+            linkLabel1.Click += GenerateReportSN;
             // 
             // label13
             // 
@@ -302,7 +302,7 @@
             label13.Font = new Font("Rockwell", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             label13.Location = new Point(13, 19);
             label13.Name = "label13";
-            label13.Size = new Size(202, 25);
+            label13.Size = new Size(238, 25);
             label13.TabIndex = 14;
             label13.Text = "Serial Number";
             label13.TextAlign = ContentAlignment.MiddleCenter;
@@ -315,7 +315,7 @@
             panel6.Controls.Add(label10);
             panel6.Location = new Point(0, 322);
             panel6.Name = "panel6";
-            panel6.Size = new Size(222, 201);
+            panel6.Size = new Size(258, 201);
             panel6.TabIndex = 9;
             // 
             // label12
@@ -324,7 +324,7 @@
             label12.Font = new Font("Lucida Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label12.Location = new Point(3, 139);
             label12.Name = "label12";
-            label12.Size = new Size(212, 18);
+            label12.Size = new Size(248, 18);
             label12.TabIndex = 16;
             label12.Text = "Estimation Stop";
             label12.TextAlign = ContentAlignment.MiddleLeft;
@@ -335,7 +335,7 @@
             label11.Font = new Font("Lucida Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label11.Location = new Point(3, 84);
             label11.Name = "label11";
-            label11.Size = new Size(212, 17);
+            label11.Size = new Size(248, 17);
             label11.TabIndex = 15;
             label11.Text = "Start Running : ";
             label11.TextAlign = ContentAlignment.MiddleLeft;
@@ -346,7 +346,7 @@
             label10.Font = new Font("Lucida Sans", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label10.Location = new Point(3, 19);
             label10.Name = "label10";
-            label10.Size = new Size(212, 17);
+            label10.Size = new Size(248, 17);
             label10.TabIndex = 14;
             label10.Text = "Date : ";
             label10.TextAlign = ContentAlignment.MiddleLeft;
@@ -368,7 +368,6 @@
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             panel5.ResumeLayout(false);
-            panel5.PerformLayout();
             panel6.ResumeLayout(false);
             ResumeLayout(false);
         }

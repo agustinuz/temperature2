@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.104.2" />
     <PackageReference Include="Dapper" Version="2.1.35" />
     <PackageReference Include="itext" Version="9.0.0" />
     <PackageReference Include="itext.bouncy-castle-adapter" Version="9.0.0" />
@@ -33,6 +34,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="BurnInReport.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
