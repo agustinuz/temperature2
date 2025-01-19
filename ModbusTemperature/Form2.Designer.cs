@@ -42,19 +42,19 @@
             label3 = new Label();
             button1 = new Button();
             panel5 = new Panel();
-            label9 = new Label();
-            label8 = new Label();
-            label7 = new Label();
-            label6 = new Label();
-            label5 = new Label();
-            label4 = new Label();
-            label2 = new Label();
-            label1 = new Label();
+            linkLabel8 = new LinkLabel();
+            linkLabel7 = new LinkLabel();
+            linkLabel6 = new LinkLabel();
+            linkLabel5 = new LinkLabel();
+            linkLabel4 = new LinkLabel();
+            linkLabel3 = new LinkLabel();
+            linkLabel2 = new LinkLabel();
+            linkLabel1 = new LinkLabel();
+            label13 = new Label();
             panel6 = new Panel();
             label12 = new Label();
             label11 = new Label();
             label10 = new Label();
-            label13 = new Label();
             ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
@@ -168,108 +168,144 @@
             // 
             // panel5
             // 
+            panel5.AutoScroll = true;
             panel5.BackColor = Color.PeachPuff;
+            panel5.Controls.Add(linkLabel8);
+            panel5.Controls.Add(linkLabel7);
+            panel5.Controls.Add(linkLabel6);
+            panel5.Controls.Add(linkLabel5);
+            panel5.Controls.Add(linkLabel4);
+            panel5.Controls.Add(linkLabel3);
+            panel5.Controls.Add(linkLabel2);
+            panel5.Controls.Add(linkLabel1);
             panel5.Controls.Add(label13);
-            panel5.Controls.Add(label9);
-            panel5.Controls.Add(label8);
-            panel5.Controls.Add(label7);
-            panel5.Controls.Add(label6);
-            panel5.Controls.Add(label5);
-            panel5.Controls.Add(label4);
-            panel5.Controls.Add(label2);
-            panel5.Controls.Add(label1);
             panel5.Location = new Point(0, 82);
             panel5.Name = "panel5";
             panel5.Size = new Size(222, 241);
             panel5.TabIndex = 8;
             // 
-            // label9
+            // linkLabel8
             // 
-            label9.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label9.Font = new Font("Rockwell", 12F, FontStyle.Bold | FontStyle.Italic);
-            label9.Location = new Point(3, 172);
-            label9.Name = "label9";
-            label9.Size = new Size(202, 15);
-            label9.TabIndex = 13;
-            label9.Text = "Serial 8";
-            label9.TextAlign = ContentAlignment.MiddleCenter;
+            linkLabel8.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            linkLabel8.AutoEllipsis = true;
+            linkLabel8.AutoSize = true;
+            linkLabel8.BackColor = Color.DodgerBlue;
+            linkLabel8.Location = new Point(7, 175);
+            linkLabel8.Name = "linkLabel8";
+            linkLabel8.Size = new Size(44, 15);
+            linkLabel8.TabIndex = 22;
+            linkLabel8.TabStop = true;
+            linkLabel8.Text = "Serial 8";
+            linkLabel8.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label8
+            // linkLabel7
             // 
-            label8.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label8.Font = new Font("Rockwell", 12F, FontStyle.Bold | FontStyle.Italic);
-            label8.Location = new Point(3, 157);
-            label8.Name = "label8";
-            label8.Size = new Size(202, 15);
-            label8.TabIndex = 12;
-            label8.Text = "Serial 7";
-            label8.TextAlign = ContentAlignment.MiddleCenter;
+            linkLabel7.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            linkLabel7.AutoEllipsis = true;
+            linkLabel7.AutoSize = true;
+            linkLabel7.BackColor = Color.DodgerBlue;
+            linkLabel7.Location = new Point(7, 160);
+            linkLabel7.Name = "linkLabel7";
+            linkLabel7.Size = new Size(44, 15);
+            linkLabel7.TabIndex = 21;
+            linkLabel7.TabStop = true;
+            linkLabel7.Text = "Serial 7";
+            linkLabel7.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label7
+            // linkLabel6
             // 
-            label7.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label7.Font = new Font("Rockwell", 12F, FontStyle.Bold | FontStyle.Italic);
-            label7.Location = new Point(3, 142);
-            label7.Name = "label7";
-            label7.Size = new Size(202, 15);
-            label7.TabIndex = 11;
-            label7.Text = "Serial 6";
-            label7.TextAlign = ContentAlignment.MiddleCenter;
+            linkLabel6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            linkLabel6.AutoEllipsis = true;
+            linkLabel6.AutoSize = true;
+            linkLabel6.BackColor = Color.DodgerBlue;
+            linkLabel6.Location = new Point(7, 145);
+            linkLabel6.Name = "linkLabel6";
+            linkLabel6.Size = new Size(44, 15);
+            linkLabel6.TabIndex = 20;
+            linkLabel6.TabStop = true;
+            linkLabel6.Text = "Serial 6";
+            linkLabel6.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label6
+            // linkLabel5
             // 
-            label6.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label6.Font = new Font("Rockwell", 12F, FontStyle.Bold | FontStyle.Italic);
-            label6.Location = new Point(3, 127);
-            label6.Name = "label6";
-            label6.Size = new Size(202, 15);
-            label6.TabIndex = 10;
-            label6.Text = "Serial 5";
-            label6.TextAlign = ContentAlignment.MiddleCenter;
+            linkLabel5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            linkLabel5.AutoEllipsis = true;
+            linkLabel5.AutoSize = true;
+            linkLabel5.BackColor = Color.DodgerBlue;
+            linkLabel5.Location = new Point(7, 130);
+            linkLabel5.Name = "linkLabel5";
+            linkLabel5.Size = new Size(44, 15);
+            linkLabel5.TabIndex = 19;
+            linkLabel5.TabStop = true;
+            linkLabel5.Text = "Serial 5";
+            linkLabel5.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label5
+            // linkLabel4
             // 
-            label5.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label5.Font = new Font("Rockwell", 12F, FontStyle.Bold | FontStyle.Italic);
-            label5.Location = new Point(3, 112);
-            label5.Name = "label5";
-            label5.Size = new Size(202, 15);
-            label5.TabIndex = 9;
-            label5.Text = "Serial 4";
-            label5.TextAlign = ContentAlignment.MiddleCenter;
+            linkLabel4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            linkLabel4.AutoEllipsis = true;
+            linkLabel4.AutoSize = true;
+            linkLabel4.BackColor = Color.DodgerBlue;
+            linkLabel4.Location = new Point(7, 115);
+            linkLabel4.Name = "linkLabel4";
+            linkLabel4.Size = new Size(44, 15);
+            linkLabel4.TabIndex = 18;
+            linkLabel4.TabStop = true;
+            linkLabel4.Text = "Serial 4";
+            linkLabel4.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label4
+            // linkLabel3
             // 
-            label4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label4.Font = new Font("Rockwell", 12F, FontStyle.Bold | FontStyle.Italic);
-            label4.Location = new Point(3, 97);
-            label4.Name = "label4";
-            label4.Size = new Size(202, 15);
-            label4.TabIndex = 8;
-            label4.Text = "Serial 3";
-            label4.TextAlign = ContentAlignment.MiddleCenter;
+            linkLabel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            linkLabel3.AutoEllipsis = true;
+            linkLabel3.AutoSize = true;
+            linkLabel3.BackColor = Color.DodgerBlue;
+            linkLabel3.Location = new Point(7, 100);
+            linkLabel3.Name = "linkLabel3";
+            linkLabel3.Size = new Size(44, 15);
+            linkLabel3.TabIndex = 17;
+            linkLabel3.TabStop = true;
+            linkLabel3.Text = "Serial 3";
+            linkLabel3.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label2
+            // linkLabel2
             // 
-            label2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label2.Font = new Font("Rockwell", 12F, FontStyle.Bold | FontStyle.Italic);
-            label2.Location = new Point(3, 82);
-            label2.Name = "label2";
-            label2.Size = new Size(202, 15);
-            label2.TabIndex = 7;
-            label2.Text = "Serial 2";
-            label2.TextAlign = ContentAlignment.MiddleCenter;
+            linkLabel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            linkLabel2.AutoEllipsis = true;
+            linkLabel2.AutoSize = true;
+            linkLabel2.BackColor = Color.DodgerBlue;
+            linkLabel2.Location = new Point(7, 85);
+            linkLabel2.Name = "linkLabel2";
+            linkLabel2.Size = new Size(44, 15);
+            linkLabel2.TabIndex = 16;
+            linkLabel2.TabStop = true;
+            linkLabel2.Text = "Serial 2";
+            linkLabel2.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label1
+            // linkLabel1
             // 
-            label1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label1.Font = new Font("Rockwell", 12F, FontStyle.Bold | FontStyle.Italic);
-            label1.Location = new Point(3, 67);
-            label1.Name = "label1";
-            label1.Size = new Size(202, 15);
-            label1.TabIndex = 6;
-            label1.Text = "Serial 1";
-            label1.TextAlign = ContentAlignment.MiddleCenter;
+            linkLabel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            linkLabel1.AutoSize = true;
+            linkLabel1.BackColor = Color.DodgerBlue;
+            linkLabel1.LinkColor = Color.FromArgb(0, 0, 192);
+            linkLabel1.Location = new Point(7, 68);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(44, 15);
+            linkLabel1.TabIndex = 15;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "Serial 1";
+            linkLabel1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label13
+            // 
+            label13.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            label13.Font = new Font("Rockwell", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label13.Location = new Point(13, 19);
+            label13.Name = "label13";
+            label13.Size = new Size(202, 25);
+            label13.TabIndex = 14;
+            label13.Text = "Serial Number";
+            label13.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // panel6
             // 
@@ -315,17 +351,6 @@
             label10.Text = "Date : ";
             label10.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // label13
-            // 
-            label13.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label13.Font = new Font("Rockwell", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label13.Location = new Point(13, 19);
-            label13.Name = "label13";
-            label13.Size = new Size(202, 25);
-            label13.TabIndex = 14;
-            label13.Text = "Serial Number";
-            label13.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -343,6 +368,7 @@
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             panel5.ResumeLayout(false);
+            panel5.PerformLayout();
             panel6.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -357,19 +383,19 @@
         private Panel panel2;
         private Button button1;
         private Panel panel5;
-        private Label label9;
-        private Label label8;
-        private Label label7;
-        private Label label6;
-        private Label label5;
-        private Label label4;
-        private Label label2;
-        private Label label1;
         private Panel panel6;
         private Label label12;
         private Label label11;
         private Label label10;
         private TextBox textBox1;
         private Label label13;
+        private LinkLabel linkLabel8;
+        private LinkLabel linkLabel7;
+        private LinkLabel linkLabel6;
+        private LinkLabel linkLabel5;
+        private LinkLabel linkLabel4;
+        private LinkLabel linkLabel3;
+        private LinkLabel linkLabel2;
+        private LinkLabel linkLabel1;
     }
 }

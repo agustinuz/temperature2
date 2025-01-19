@@ -32,14 +32,14 @@ namespace ModbusTemperature
         private DateTime startTime;
         private DateTime endTime;
         private Label[] getSerialLables() => [
-            label1,
-            label2,
-            label4,
-            label5,
-            label6,
-            label7,
-            label8,
-            label9
+            linkLabel1,
+            linkLabel2,
+            linkLabel3,
+            linkLabel4,
+            linkLabel5,
+            linkLabel6,
+            linkLabel7,
+            linkLabel8
         ];
         void setChartSerialNumberTitle(ModelMaster master)
         {
