@@ -278,7 +278,7 @@ namespace ModbusTemperature
                 setChartSerialNumberTitle(master);
                 var groupedData = GroupingDataByTime(_dt);
                 string[] sourceImages = new string[groupedData.Count];
-                string basePath = @"C:\Users\frans\source\repos\PDF\";
+                string basePath = @"C:\Users\user\source\repos\PDF\";
                 string baseSN = master.SerialNumber.Replace(@"\", @"%%").Replace(@"/", "%%");
                 for (int i = 0; i < groupedData.Count; i++)
                 {
@@ -318,7 +318,8 @@ namespace ModbusTemperature
         private void GenerateReportSN(object sender, EventArgs e)
         {
             LinkLabel linklabel = (LinkLabel)sender;
-            var dt = ModelDetail.GetModelDetailsBySerialNumber(linklabel.Text);
+            string label = linklabel.Text.Replace("\\", "%%").Replace("/", "%%");
+            var dt = ModelDetail.GetModelDetailsBySerialNumber(label);
             var dataGroup = dt.GroupBy(x => new { time = x.RecordedAt.ToString("yyyy-MM-dd HH") }).ToArray();
             string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BurnInReport.xlsx");
             using (var wb = new XLWorkbook(fileName))
@@ -327,16 +328,16 @@ namespace ModbusTemperature
                 worksheet.Cells("B3").Value = startTime.ToString("MM/dd/yyyy HH:mm:ss");
                 worksheet.Cells("B4").Value = endTime.ToString("MM/dd/yyyy HH:mm:ss");
                 worksheet.Cells("B5").Value = badgeId;
-                worksheet.Cells("B7").Value = linklabel.Text;
+                worksheet.Cells("B7").Value = label;
                 worksheet.Cells("B8").Value = $"{(endTime - startTime).TotalHours.ToString("0.00")}";
                 for (int i = 0, j = 14; i < dataGroup.Length || j <= 21; i++, j++)
                 {
                     if (dataGroup.Length > i)
                     {
                         var group = dataGroup[i];
-                        string label = dataGroup[i].Select(x => x.RecordedAt).First().ToString("HH:mm");
+                        string _label = dataGroup[i].Select(x => x.RecordedAt).First().ToString("HH:mm");
                         double avgTemp = dataGroup[i].Select(x => x.TemperatureData).Average();
-                        worksheet.Cells($"B{j}").Value = label;
+                        worksheet.Cells($"B{j}").Value = _label;
                         worksheet.Cells($"C{j}").Value = avgTemp.ToString("0.00");
                     }
                     else
@@ -346,12 +347,12 @@ namespace ModbusTemperature
                     }
 
                 }
-                string basePath = @"C:\Users\frans\source\repos\PDF\";
-                string saveFile = $"Excel_{linklabel.Text}_{badgeId}.xlsx";
+                string basePath = @"C:\Users\user\source\repos\PDF\";
+                string saveFile = $"Excel_{label}_{badgeId}.xlsx";
                 int index = 2;
                 while (File.Exists(Path.Combine(basePath, saveFile)))
                 {
-                    saveFile = $"Excel_{linklabel.Text}_{badgeId}_{index}.xlsx";
+                    saveFile = $"Excel_{label}_{badgeId}_{index}.xlsx";
                     index = index + 1;
                 }
                 wb.SaveAs(Path.Combine(basePath,saveFile ));
