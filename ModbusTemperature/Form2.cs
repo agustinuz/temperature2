@@ -117,7 +117,7 @@ namespace ModbusTemperature
         {
             try
             {
-                using (SerialPort port = new("COM11"))
+                using (SerialPort port = new("COM4"))
                 {
                     port.BaudRate = 9600; // Sesuaikan dengan baud rate perangkat kamu
                     port.DataBits = 8;
@@ -278,7 +278,7 @@ namespace ModbusTemperature
                 setChartSerialNumberTitle(master);
                 var groupedData = GroupingDataByTime(_dt);
                 string[] sourceImages = new string[groupedData.Count];
-                string basePath = @"C:\Users\user\source\repos\PDF\";
+                string basePath = @"C:\Users\USER\Desktop\TEMPERATURE DATA\PDF\";
                 string baseSN = master.SerialNumber.Replace(@"\", @"%%").Replace(@"/", "%%");
                 for (int i = 0; i < groupedData.Count; i++)
                 {
@@ -347,7 +347,7 @@ namespace ModbusTemperature
                     }
 
                 }
-                string basePath = @"C:\Users\user\source\repos\PDF\";
+                string basePath = @"C:\Users\USER\Desktop\TEMPERATURE DATA\Excel\";
                 string saveFile = $"Excel_{label}_{badgeId}.xlsx";
                 int index = 2;
                 while (File.Exists(Path.Combine(basePath, saveFile)))
