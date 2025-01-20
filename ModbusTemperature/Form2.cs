@@ -319,7 +319,7 @@ namespace ModbusTemperature
         {
             LinkLabel linklabel = (LinkLabel)sender;
             string label = linklabel.Text.Replace("\\", "%%").Replace("/", "%%");
-            var dt = ModelDetail.GetModelDetailsBySerialNumber(label);
+            var dt = ModelDetail.GetModelDetailsBySerialNumber(linklabel.Text);
             var dataGroup = dt.GroupBy(x => new { time = x.RecordedAt.ToString("yyyy-MM-dd HH") }).ToArray();
             string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BurnInReport.xlsx");
             using (var wb = new XLWorkbook(fileName))
