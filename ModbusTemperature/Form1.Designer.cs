@@ -32,6 +32,7 @@
             toolTip1 = new ToolTip(components);
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             panel3 = new Panel();
+            button1 = new Button();
             textBox10 = new TextBox();
             textBox9 = new TextBox();
             textBox8 = new TextBox();
@@ -45,7 +46,6 @@
             label6 = new Label();
             label7 = new Label();
             textBox13 = new TextBox();
-            button1 = new Button();
             panel3.SuspendLayout();
             SuspendLayout();
             // 
@@ -73,6 +73,17 @@
             panel3.Size = new Size(422, 619);
             panel3.TabIndex = 11;
             panel3.Paint += panel3_Paint;
+            // 
+            // button1
+            // 
+            button1.Enabled = false;
+            button1.Location = new Point(9, 10);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 12;
+            button1.Text = "SETTING";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // textBox10
             // 
@@ -206,16 +217,6 @@
             textBox13.Size = new Size(288, 27);
             textBox13.TabIndex = 1;
             textBox13.KeyDown += textBox13_KeyDown;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(9, 10);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 12;
-            button1.Text = "SETTING";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // Form1
             // 
