@@ -291,7 +291,7 @@ namespace ModbusTemperature
                     chart1.SaveImage(Path.Combine(basePath, $"{baseSN}-{i}.jpg"), ChartImageFormat.Jpeg);
 
                 }
-                PDFUtility.MasterModelToPDF(sourceImages, Path.Combine(basePath, $"{master.badgeId}_{master.SerialNumber}_{master.RecordedAt.ToString("yyyy-MM-dd")}.pdf"));
+                PDFUtility.MasterModelToPDF(sourceImages, Path.Combine(basePath, $"{master.badgeId}_{baseSN}_{master.RecordedAt.ToString("yyyy-MM-dd")}.pdf"));
                 for (int i = 0; i < sourceImages.Length; i++)
                     File.Delete(sourceImages[i]);
             }
