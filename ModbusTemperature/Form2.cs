@@ -343,16 +343,15 @@ namespace ModbusTemperature
         private void GenerateReportSN(object sender, EventArgs e)
         {
             LinkLabel linklabel = (LinkLabel)sender;
-            string label = linklabel.Text.Replace("\\", "%%").Replace("/", "%%");
-            GenerateSNExcel(label);
+            GenerateSNExcel(linklabel.Text);
             MessageBox.Show("Generating Report Success");
         }
         private void GenerateSNExcel(params string[] serials)
         {
             for (int z=0;z<serials.Length;z++)
             {
-                string label = serials[z];
-                var dt = GetDataFromInterval(1000,label);
+                string label = serials[z].Replace("\\", "%%").Replace("/", "%%");
+                var dt = GetDataFromInterval(1000, serials[z]);
                 var dataGroup = dt.GroupBy(x => new { time = x.RecordedAt.ToString("yyyy-MM-dd HH") }).ToArray();
                 string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BurnInReport.xlsx");
                 using (var wb = new XLWorkbook(fileName))
