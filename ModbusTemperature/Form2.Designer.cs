@@ -116,6 +116,7 @@
             // 
             // textBox1
             // 
+            textBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             textBox1.Location = new Point(805, 114);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";

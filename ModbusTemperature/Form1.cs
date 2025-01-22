@@ -110,11 +110,11 @@ namespace ModbusTemperature
             using (var form3 = new Form3())
             {
                 // Tampilkan Form3 sebagai dialog modal
-                if (form3.ShowDialog() == DialogResult.OK)
-                {
+                //if (form3.ShowDialog() == DialogResult.OK)
+                //{
                     // Ambil nilai interval dari Form3
                     interval = form3.interval;
-                }
+                //}
             }
             string[] serials = GetSerialNumbersFromTextboxes();
             // Periksa jika badgeId kosong

@@ -54,7 +54,7 @@ namespace ModbusTemperature.Model
             using (var connection = ConfigDB.GetConnection())
             {
 ;                string query = $@"SELECT badgeId,SerialNumber,RecordedAt,Interval
-                                    FROM [TemperatureDataMaster] where SerialNumberIn (@sn) order by recordedAt Desc";
+                                    FROM [TemperatureDataMaster] where SerialNumber in @sn order by recordedAt Desc";
                 // Assuming you want to record the time in RecordedAt field
                 var dataMaster = connection.Query<ModelMaster>(query,new {sn=serials}).ToList();
                 return dataMaster;
@@ -70,7 +70,7 @@ namespace ModbusTemperature.Model
                 var dataMaster = connection.Query<ModelMaster>(query).FirstOrDefault();
                 if (dataMaster is null)
                     return new List<ModelDetail>();
-                query = @"SELECT SerialNumber,TemperatureData,RecordedAt,Interval FROM TemperatureDataDetail where SerialNumber=@SerialNumber";
+                query = @"SELECT SerialNumber,TemperatureData,RecordedAt FROM TemperatureDataDetail where SerialNumber=@SerialNumber";
                 return connection.Query<ModelDetail>(query,new { SerialNumber=dataMaster.SerialNumber}).ToList();
             }
         }
