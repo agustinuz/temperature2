@@ -266,7 +266,7 @@ namespace ModbusTemperature
 
                 SaveDataPDF(dt);
                 GenerateSNExcel(masterModels.Select(x => x.SerialNumber).ToArray());
-                MessageBox.Show("Report have been generated");
+                this.Close();
             }
         }
         List<ModelDetail> GetDataFromInterval( int _interval,string? model =null)
