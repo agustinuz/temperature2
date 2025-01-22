@@ -30,6 +30,7 @@
         {
             panel1 = new Panel();
             panel3 = new Panel();
+            button3 = new Button();
             comboBox3 = new ComboBox();
             label6 = new Label();
             comboBox2 = new ComboBox();
@@ -44,7 +45,6 @@
             textBox1 = new TextBox();
             button1 = new Button();
             label1 = new Label();
-            button3 = new Button();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
@@ -81,6 +81,17 @@
             panel3.Size = new Size(480, 381);
             panel3.TabIndex = 2;
             // 
+            // button3
+            // 
+            button3.BackColor = SystemColors.ActiveCaption;
+            button3.Location = new Point(166, 313);
+            button3.Name = "button3";
+            button3.Size = new Size(152, 31);
+            button3.TabIndex = 12;
+            button3.Text = "Save";
+            button3.UseVisualStyleBackColor = false;
+            button3.Click += button3_Click;
+            // 
             // comboBox3
             // 
             comboBox3.FormattingEnabled = true;
@@ -92,10 +103,10 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("SuperFrench", 11.999999F, FontStyle.Bold, GraphicsUnit.Point, 2);
+            label6.Font = new Font("Microsoft Sans Serif", 11F, FontStyle.Bold);
             label6.Location = new Point(35, 260);
             label6.Name = "label6";
-            label6.Size = new Size(102, 16);
+            label6.Size = new Size(105, 18);
             label6.TabIndex = 10;
             label6.Text = "Port Modbus";
             // 
@@ -111,10 +122,10 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("SuperFrench", 11.999999F, FontStyle.Bold, GraphicsUnit.Point, 2);
+            label5.Font = new Font("Microsoft Sans Serif", 11F, FontStyle.Bold);
             label5.Location = new Point(35, 219);
             label5.Name = "label5";
-            label5.Size = new Size(116, 16);
+            label5.Size = new Size(117, 18);
             label5.TabIndex = 8;
             label5.Text = "Timer Reading";
             // 
@@ -129,20 +140,20 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("SuperFrench", 11.999999F, FontStyle.Bold, GraphicsUnit.Point, 2);
+            label4.Font = new Font("Microsoft Sans Serif", 11F, FontStyle.Bold);
             label4.Location = new Point(35, 170);
             label4.Name = "label4";
-            label4.Size = new Size(101, 16);
+            label4.Size = new Size(98, 18);
             label4.TabIndex = 6;
             label4.Text = "Temp Timer";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("SuperFrench", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 2);
+            label3.Font = new Font("Microsoft Sans Serif", 11F, FontStyle.Bold);
             label3.Location = new Point(166, 104);
             label3.Name = "label3";
-            label3.Size = new Size(113, 13);
+            label3.Size = new Size(135, 18);
             label3.TabIndex = 5;
             label3.Text = "Link Send Status";
             // 
@@ -168,10 +179,10 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("SuperFrench", 18F, FontStyle.Bold, GraphicsUnit.Point, 2);
+            label2.Font = new Font("Microsoft Sans Serif", 11F, FontStyle.Bold);
             label2.Location = new Point(195, 34);
             label2.Name = "label2";
-            label2.Size = new Size(84, 24);
+            label2.Size = new Size(60, 18);
             label2.TabIndex = 1;
             label2.Text = "Setting";
             // 
@@ -211,23 +222,12 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("SuperFrench", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 2);
+            label1.Font = new Font("Microsoft Sans Serif", 11F, FontStyle.Bold);
             label1.Location = new Point(105, 10);
             label1.Name = "label1";
-            label1.Size = new Size(139, 13);
+            label1.Size = new Size(175, 18);
             label1.TabIndex = 0;
             label1.Text = "Create New Employee";
-            // 
-            // button3
-            // 
-            button3.BackColor = SystemColors.ActiveCaption;
-            button3.Location = new Point(166, 313);
-            button3.Name = "button3";
-            button3.Size = new Size(152, 31);
-            button3.TabIndex = 12;
-            button3.Text = "Save";
-            button3.UseVisualStyleBackColor = false;
-            button3.Click += button3_Click;
             // 
             // Form3
             // 

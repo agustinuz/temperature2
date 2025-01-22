@@ -119,6 +119,7 @@
             textBox1.Location = new Point(805, 114);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
             textBox1.Size = new Size(100, 41);
             textBox1.TabIndex = 11;
             textBox1.TextChanged += textBox1_TextChanged;
@@ -358,7 +359,7 @@
             ClientSize = new Size(1248, 668);
             Controls.Add(panel1);
             Name = "Form2";
-            Text = "Form2";
+            Text = "Burn-In Monitoring";
             ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

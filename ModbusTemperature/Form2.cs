@@ -49,10 +49,10 @@ namespace ModbusTemperature
         }
         void loadChartByMasterModel(ModelMaster _masterModel)
         {
-            var details = ModelDetail.GetModelDetailsBySerialNumber(_masterModel.SerialNumber);
+            var details = GetDataFromInterval(_masterModel.SerialNumber);
             startTime = details.First().RecordedAt;
             endTime = details.Last().RecordedAt;
-            label10.Text = $"date :  {startTime.ToString("yyyy MMM dd")}";
+            label10.Text = $"Date :  {startTime.ToString("yyyy MMM dd")}";
             label11.Text = $"Start Running : {startTime.ToString("HH:mm:ss")}";
             label12.Text = $"Estimation Stop  : {endTime.ToString("HH:mm:ss")}";
             setupChart(details, masterModels[0]);
@@ -91,7 +91,7 @@ namespace ModbusTemperature
                 loadChartByMasterModel(masterModels[0]);
                 return;
             }
-            temperatureTimer.Interval = interval;
+            temperatureTimer.Interval = 1000;
             temperatureTimer.Tick += TemperatureTimer_Tick;
             startTime = DateTime.Now;
             endTime = startTime.AddSeconds(8);
@@ -141,11 +141,11 @@ namespace ModbusTemperature
                         ModelDetail detail = new ModelDetail(serialNumber.SerialNumber, temperature);
                         detail.SaveDataDetail();
                     }
-                    var details = ModelDetail.GetModelDetailsBySerialNumber(masterModels.First().SerialNumber);
+                    var details = GetDataFromInterval(masterModels.First().SerialNumber);
                     details = details.TakeLast(10).ToList();
 
                     LoadDataDetailToChart(details, masterModels.First());
-                    textBox1.Text = $"{temperature} °C";
+                    textBox1.Text = $"{temperature.ToString("0.00")} °C";
 
                     //Random rnd = new Random();
                     //double temperature = rnd.NextDouble();
@@ -261,9 +261,32 @@ namespace ModbusTemperature
                         MessageBoxIcon.Warning
                     );
 
-                var dt = ModelDetail.GetModelDetailsBySerialNumber(masterModels[0].SerialNumber);
+                var dt = GetDataFromInterval();//ModelDetail.GetModelDetailsBySerialNumber(masterModels[0].SerialNumber);
+
                 SaveDataPDF(dt);
+                GenerateSNExcel(masterModels.Select(x => x.SerialNumber).ToArray());
+                MessageBox.Show("Report have been generated");
             }
+        }
+        List<ModelDetail> GetDataFromInterval(string? model =null)
+        {
+            int groupBy = (interval / 1000);
+
+            var dt = ModelDetail.GetModelDetailsBySerialNumber(model ?? masterModels[0].SerialNumber);
+            List<ModelDetail> data =new List<ModelDetail >();
+            List<ModelDetail> arr = new List<ModelDetail>();
+            for (int i=0,j=0;i<dt.Count;i++,j = (j+1) % groupBy)
+            {
+                arr.Add(dt[i]);
+                if (j == groupBy-1)
+                {
+                    ModelDetail _temp = arr.First();
+                    _temp.TemperatureData = arr.Average(x=>x.TemperatureData);
+                    data.Add(_temp);
+                    arr = new List<ModelDetail>();
+                }
+            }
+            return data;
         }
         List<List<ModelDetail>> GroupingDataByTime(List<ModelDetail> dataDetails)
         {
@@ -303,7 +326,7 @@ namespace ModbusTemperature
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var dt = ModelDetail.GetModelDetailsBySerialNumber(masterModels[0].SerialNumber);
+            var dt = GetDataFromInterval();//ModelDetail.GetModelDetailsBySerialNumber(masterModels[0].SerialNumber);
             setChartSerialNumberTitle(masterModels[0]);
             SaveDataPDF(dt);
             loadChartByMasterModel(masterModels[0]);
@@ -319,45 +342,53 @@ namespace ModbusTemperature
         {
             LinkLabel linklabel = (LinkLabel)sender;
             string label = linklabel.Text.Replace("\\", "%%").Replace("/", "%%");
-            var dt = ModelDetail.GetModelDetailsBySerialNumber(linklabel.Text);
-            var dataGroup = dt.GroupBy(x => new { time = x.RecordedAt.ToString("yyyy-MM-dd HH") }).ToArray();
-            string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BurnInReport.xlsx");
-            using (var wb = new XLWorkbook(fileName))
-            {
-                IXLWorksheet worksheet = wb.Worksheet(1);
-                worksheet.Cells("B3").Value = startTime.ToString("MM/dd/yyyy HH:mm:ss");
-                worksheet.Cells("B4").Value = endTime.ToString("MM/dd/yyyy HH:mm:ss");
-                worksheet.Cells("B5").Value = badgeId;
-                worksheet.Cells("B7").Value = label;
-                worksheet.Cells("B8").Value = $"{(endTime - startTime).TotalHours.ToString("0.00")}";
-                for (int i = 0, j = 14; i < dataGroup.Length || j <= 21; i++, j++)
-                {
-                    if (dataGroup.Length > i)
-                    {
-                        var group = dataGroup[i];
-                        string _label = dataGroup[i].Select(x => x.RecordedAt).First().ToString("HH:mm");
-                        double avgTemp = dataGroup[i].Select(x => x.TemperatureData).Average();
-                        worksheet.Cells($"B{j}").Value = _label;
-                        worksheet.Cells($"C{j}").Value = avgTemp.ToString("0.00");
-                    }
-                    else
-                    {
-                        worksheet.Cells($"B{j}").Value = "";
-                        worksheet.Cells($"C{j}").Value = "";
-                    }
-
-                }
-                string basePath = @"C:\Users\USER\Desktop\TEMPERATURE DATA\Excel\";
-                string saveFile = $"Excel_{label}_{badgeId}.xlsx";
-                int index = 2;
-                while (File.Exists(Path.Combine(basePath, saveFile)))
-                {
-                    saveFile = $"Excel_{label}_{badgeId}_{index}.xlsx";
-                    index = index + 1;
-                }
-                wb.SaveAs(Path.Combine(basePath,saveFile ));
-            }
+            GenerateSNExcel(label);
             MessageBox.Show("Generating Report Success");
+        }
+        private void GenerateSNExcel(params string[] serials)
+        {
+            for (int z=0;z<serials.Length;z++)
+            {
+                string label = serials[z];
+                var dt = GetDataFromInterval(label);
+                var dataGroup = dt.GroupBy(x => new { time = x.RecordedAt.ToString("yyyy-MM-dd HH") }).ToArray();
+                string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BurnInReport.xlsx");
+                using (var wb = new XLWorkbook(fileName))
+                {
+                    IXLWorksheet worksheet = wb.Worksheet(1);
+                    worksheet.Cells("B3").Value = startTime.ToString("MM/dd/yyyy HH:mm:ss");
+                    worksheet.Cells("B4").Value = endTime.ToString("MM/dd/yyyy HH:mm:ss");
+                    worksheet.Cells("B5").Value = badgeId;
+                    worksheet.Cells("B7").Value = label;
+                    worksheet.Cells("B8").Value = $"{(endTime - startTime).TotalHours.ToString("0.00")}";
+                    for (int i = 0, j = 14; i < dataGroup.Length || j <= 21; i++, j++)
+                    {
+                        if (dataGroup.Length > i)
+                        {
+                            var group = dataGroup[i];
+                            string _label = dataGroup[i].Select(x => x.RecordedAt).First().ToString("HH:mm");
+                            double avgTemp = dataGroup[i].Select(x => x.TemperatureData).Average();
+                            worksheet.Cells($"B{j}").Value = _label;
+                            worksheet.Cells($"C{j}").Value = avgTemp.ToString("0.00");
+                        }
+                        else
+                        {
+                            worksheet.Cells($"B{j}").Value = "";
+                            worksheet.Cells($"C{j}").Value = "";
+                        }
+
+                    }
+                    string basePath = @"C:\Users\USER\Desktop\TEMPERATURE DATA\Excel\";
+                    string saveFile = $"Excel_{label}_{badgeId}.xlsx";
+                    int index = 2;
+                    while (File.Exists(Path.Combine(basePath, saveFile)))
+                    {
+                        saveFile = $"Excel_{label}_{badgeId}_{index}.xlsx";
+                        index = index + 1;
+                    }
+                    wb.SaveAs(Path.Combine(basePath, saveFile));
+                }
+            }
         }
     }
 }

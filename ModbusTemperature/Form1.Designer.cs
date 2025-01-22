@@ -76,7 +76,6 @@
             // 
             // button1
             // 
-            button1.Enabled = false;
             button1.Location = new Point(9, 10);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
@@ -226,7 +225,7 @@
             Controls.Add(panel3);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Name = "Form1";
-            Text = "Form1";
+            Text = "Burn-In Monitoring";
             Load += Form1_Load;
             panel3.ResumeLayout(false);
             panel3.PerformLayout();

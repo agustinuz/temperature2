@@ -110,7 +110,7 @@ namespace ModbusTemperature
             using (var form3 = new Form3())
             {
                 // Tampilkan Form3 sebagai dialog modal
-         //       if (form3.ShowDialog() == DialogResult.OK)
+                if (form3.ShowDialog() == DialogResult.OK)
                 {
                     // Ambil nilai interval dari Form3
                     interval = form3.interval;
@@ -137,6 +137,7 @@ namespace ModbusTemperature
                     var masterModel = new ModelMaster();
                     masterModel.SerialNumber = serials[i];
                     masterModel.badgeId = badgeId;
+                    masterModel.Interval = interval;
                     masterModels.Add(masterModel);
                 }
             }
@@ -196,13 +197,14 @@ namespace ModbusTemperature
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var lastMasterData = ModelMaster.GetLastMasterDataByScanCodeTime();
+            string[] scanSerial = GetSerialNumbersFromTextboxes();
+            var lastMasterData = scanSerial.Any(x=>x!="") ? ModelMaster.GetMasterModelBySerial(scanSerial) :  ModelMaster.GetLastListMasterDataByScanCodeTime();
             if (lastMasterData is null)
             {
                 MessageBox.Show("No Data Found");
                 return;
             }
-            Form2 frm = new Form2([lastMasterData], lastMasterData?.badgeId ?? "", interval, false);
+            Form2 frm = new Form2(lastMasterData.ToArray(), lastMasterData.FirstOrDefault()?.badgeId ?? "", lastMasterData.FirstOrDefault()?.Interval ?? interval, false);
             frm.Show();
         }
 
