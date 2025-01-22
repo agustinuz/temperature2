@@ -94,7 +94,7 @@ namespace ModbusTemperature
             temperatureTimer.Interval = 1000;
             temperatureTimer.Tick += TemperatureTimer_Tick;
             startTime = DateTime.Now;
-            endTime = startTime.AddSeconds(8);
+            endTime = startTime.AddHours(8);
             StartReadingTemperature();
             label10.Text = $"date :  {startTime.ToString("yyyy MMM dd")}";
             label11.Text = $"Start Running : {startTime.ToString("HH:mm:ss")}";
