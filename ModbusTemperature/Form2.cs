@@ -49,7 +49,7 @@ namespace ModbusTemperature
         }
         void loadChartByMasterModel(ModelMaster _masterModel)
         {
-            var details = GetDataFromInterval(_masterModel.SerialNumber);
+            var details = GetDataFromInterval(interval,_masterModel.SerialNumber);
             startTime = details.First().RecordedAt;
             endTime = details.Last().RecordedAt;
             label10.Text = $"Date :  {startTime.ToString("yyyy MMM dd")}";
@@ -141,7 +141,7 @@ namespace ModbusTemperature
                         ModelDetail detail = new ModelDetail(serialNumber.SerialNumber, temperature);
                         detail.SaveDataDetail();
                     }
-                    var details = GetDataFromInterval(masterModels.First().SerialNumber);
+                    var details = GetDataFromInterval(interval,masterModels.First().SerialNumber);
                     details = details.TakeLast(10).ToList();
 
                     LoadDataDetailToChart(details, masterModels.First());
@@ -261,16 +261,16 @@ namespace ModbusTemperature
                         MessageBoxIcon.Warning
                     );
 
-                var dt = GetDataFromInterval();//ModelDetail.GetModelDetailsBySerialNumber(masterModels[0].SerialNumber);
+                var dt = GetDataFromInterval(interval);//ModelDetail.GetModelDetailsBySerialNumber(masterModels[0].SerialNumber);
 
                 SaveDataPDF(dt);
                 GenerateSNExcel(masterModels.Select(x => x.SerialNumber).ToArray());
                 MessageBox.Show("Report have been generated");
             }
         }
-        List<ModelDetail> GetDataFromInterval(string? model =null)
+        List<ModelDetail> GetDataFromInterval( int _interval,string? model =null)
         {
-            int groupBy = (interval / 1000);
+            int groupBy = (_interval / 1000);
 
             var dt = ModelDetail.GetModelDetailsBySerialNumber(model ?? masterModels[0].SerialNumber);
             List<ModelDetail> data =new List<ModelDetail >();
@@ -296,6 +296,7 @@ namespace ModbusTemperature
         }
         void SaveDataPDF(List<ModelDetail> _dt)
         {
+            _dt = GetDataFromInterval(60 * 1000);
             foreach (var master in masterModels)
             {
                 setChartSerialNumberTitle(master);
@@ -326,7 +327,7 @@ namespace ModbusTemperature
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var dt = GetDataFromInterval();//ModelDetail.GetModelDetailsBySerialNumber(masterModels[0].SerialNumber);
+            var dt = GetDataFromInterval(interval);//ModelDetail.GetModelDetailsBySerialNumber(masterModels[0].SerialNumber);
             setChartSerialNumberTitle(masterModels[0]);
             SaveDataPDF(dt);
             loadChartByMasterModel(masterModels[0]);
@@ -350,7 +351,7 @@ namespace ModbusTemperature
             for (int z=0;z<serials.Length;z++)
             {
                 string label = serials[z];
-                var dt = GetDataFromInterval(label);
+                var dt = GetDataFromInterval(1000,label);
                 var dataGroup = dt.GroupBy(x => new { time = x.RecordedAt.ToString("yyyy-MM-dd HH") }).ToArray();
                 string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BurnInReport.xlsx");
                 using (var wb = new XLWorkbook(fileName))
