@@ -201,7 +201,8 @@ namespace ModbusTemperature
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error reading temperature: {ex.Message}");
+                Console.WriteLine(ex.Message);
+               // MessageBox.Show($"Error reading temperature: {ex.Message}");
             }
         }
         protected override void OnFormClosed(FormClosedEventArgs e)
@@ -291,12 +292,12 @@ namespace ModbusTemperature
         List<List<ModelDetail>> GroupingDataByTime(List<ModelDetail> dataDetails)
         {
             //            string dateFormat = "";//dataDetails.Count <= 60 ? "yyyy-MM-dd HH:mm:00" : "yyyy-MM-dd HH:00:00";
-            var dataGroup = dataDetails.GroupBy(x => new { time = x.RecordedAt.ToString("yyyy-MM-dd HH"), minute = x.RecordedAt.Minute > 30 });
+            var dataGroup = dataDetails.GroupBy(x => new { time = x.RecordedAt.ToString("yyyy-MM-dd HH"), minute = true });
             return interval <= 30 * 60 * 1000 && dataDetails.Count > 10 ? dataGroup.Select(x => x.ToList()).ToList() : new List<List<ModelDetail>>() { dataDetails };
         }
         void SaveDataPDF(List<ModelDetail> _dt)
         {
-            _dt = GetDataFromInterval(60 * 1000);
+            _dt = GetDataFromInterval(3600 * 1000);
             foreach (var master in masterModels)
             {
                 setChartSerialNumberTitle(master);
