@@ -130,11 +130,13 @@ namespace ModbusTemperature
                 MessageBox.Show("Serial Number belum diinput.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return; // Jangan lanjutkan eksekusi
             }
+            Guid RunningId = Guid.NewGuid();
             for (int i = 0; i < serials.Length; i++)
             {
                 if (serials[i] != "")
                 {
                     var masterModel = new ModelMaster();
+                    masterModel.RunningId = RunningId;
                     masterModel.SerialNumber = serials[i];
                     masterModel.badgeId = badgeId;
                     masterModel.Interval = interval;

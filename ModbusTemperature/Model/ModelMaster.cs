@@ -7,6 +7,7 @@ namespace ModbusTemperature.Model
 
     {
         // Assuming badgeId and SerialNumber are strings, but change this as needed
+        public Guid RunningId { get; set; } = Guid.Empty; 
         public string badgeId { get; set; } = string.Empty;
         public string SerialNumber { get; set; } = string.Empty;
         public DateTime RecordedAt { get; set; } = DateTime.Now;
@@ -17,10 +18,10 @@ namespace ModbusTemperature.Model
         {
             using (var connection = ConfigDB.GetConnection())
             {
-                var query = "INSERT INTO TemperatureDataMaster (badgeId, SerialNumber,Interval, RecordedAt) " +
-                            "VALUES (@badgeId, @SerialNumber,@Interval, @recordedAt)";
+                var query = "INSERT INTO TemperatureDataMaster (RunningId,badgeId, SerialNumber,Interval, RecordedAt) " +
+                            "VALUES (@RunningId,@badgeId, @SerialNumber,@Interval, @recordedAt)";
                 // Assuming you want to record the time in RecordedAt field
-                var parameters = SerialNumber.Select(sn => new { badgeId, SerialNumber = sn,Interval=interval, recordedAt = DateTime.Now }).ToList();
+                var parameters = SerialNumber.Select(sn => new {RunningId=Guid.NewGuid(), badgeId, SerialNumber = sn,Interval=interval, recordedAt = DateTime.Now }).ToList();
 
                 // Menyimpan banyak data dalam satu batch
                 connection.Execute(query, parameters);
@@ -31,7 +32,7 @@ namespace ModbusTemperature.Model
         {
             using (var connection = ConfigDB.GetConnection())
             {
-                string query = @"SELECT badgeId,SerialNumber,RecordedAt,Interval
+                string query = @"SELECT RunningId,badgeId,SerialNumber,RecordedAt,Interval
                                     FROM [TemperatureDataMaster]  order by recordedAt Desc";
                 // Assuming you want to record the time in RecordedAt field
                 var dataMaster = connection.Query<ModelMaster>(query).FirstOrDefault();
@@ -42,7 +43,7 @@ namespace ModbusTemperature.Model
         {
             using (var connection = ConfigDB.GetConnection())
             {
-                string query = @"SELECT badgeId,SerialNumber,RecordedAt,Interval
+                string query = @"SELECT RunningId,badgeId,SerialNumber,RecordedAt,Interval
                                     FROM [TemperatureDataMaster] where RecordedAt=(Select top 1 RecordedAt from TemperatureDataMaster group by RecordedAt order by RecordedAt desc) order by recordedAt Desc";
                 // Assuming you want to record the time in RecordedAt field
                 var dataMaster = connection.Query<ModelMaster>(query).ToList();
@@ -53,7 +54,7 @@ namespace ModbusTemperature.Model
         {
             using (var connection = ConfigDB.GetConnection())
             {
-;                string query = $@"SELECT badgeId,SerialNumber,RecordedAt,Interval
+;                string query = $@"SELECT RunningId,badgeId,SerialNumber,RecordedAt,Interval
                                     FROM [TemperatureDataMaster] where SerialNumber in @sn order by recordedAt Desc";
                 // Assuming you want to record the time in RecordedAt field
                 var dataMaster = connection.Query<ModelMaster>(query,new {sn=serials}).ToList();
@@ -64,7 +65,7 @@ namespace ModbusTemperature.Model
         {
             using (var connection = ConfigDB.GetConnection())
             {
-                string query = @"SELECT badgeId,SerialNumber,RecordedAt,Interval
+                string query = @"SELECT RunningId,badgeId,SerialNumber,RecordedAt,Interval
                                     FROM [TemperatureDataMaster] order by recordedAt Desc";
                 // Assuming you want to record the time in RecordedAt field
                 var dataMaster = connection.Query<ModelMaster>(query).FirstOrDefault();
@@ -78,8 +79,8 @@ namespace ModbusTemperature.Model
         {
             using (var connection = ConfigDB.GetConnection())
             {
-                string query = "INSERT INTO TemperatureDataMaster (badgeId, SerialNumber, RecordedAt,Interval) " +
-                               "VALUES (@badgeId, @SerialNumber, @recordedAt,@Interval)";
+                string query = "INSERT INTO TemperatureDataMaster (RunningId,badgeId, SerialNumber, RecordedAt,Interval) " +
+                               "VALUES (@RunningId,@badgeId, @SerialNumber, @recordedAt,@Interval)";
                 connection.Execute(query, this);
             }
         }
