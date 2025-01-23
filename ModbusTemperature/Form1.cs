@@ -136,7 +136,7 @@ namespace ModbusTemperature
                 if (serials[i] != "")
                 {
                     var masterModel = new ModelMaster();
-                    masterModel.RunningId = RunningId;
+                    masterModel.RunningId = RunningId.ToString();
                     masterModel.SerialNumber = serials[i];
                     masterModel.badgeId = badgeId;
                     masterModel.Interval = interval;

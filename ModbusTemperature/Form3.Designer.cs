@@ -104,7 +104,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Microsoft Sans Serif", 11F, FontStyle.Bold);
-            label6.Location = new Point(35, 260);
+            label6.Location = new Point(35, 255);
             label6.Name = "label6";
             label6.Size = new Size(105, 18);
             label6.TabIndex = 10;
@@ -123,7 +123,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Microsoft Sans Serif", 11F, FontStyle.Bold);
-            label5.Location = new Point(35, 219);
+            label5.Location = new Point(35, 214);
             label5.Name = "label5";
             label5.Size = new Size(117, 18);
             label5.TabIndex = 8;

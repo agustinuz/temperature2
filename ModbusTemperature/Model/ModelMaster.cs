@@ -7,7 +7,7 @@ namespace ModbusTemperature.Model
 
     {
         // Assuming badgeId and SerialNumber are strings, but change this as needed
-        public Guid RunningId { get; set; } = Guid.Empty; 
+        public string RunningId { get; set; } = Guid.Empty.ToString(); 
         public string badgeId { get; set; } = string.Empty;
         public string SerialNumber { get; set; } = string.Empty;
         public DateTime RecordedAt { get; set; } = DateTime.Now;

@@ -7,6 +7,7 @@ using NModbus.Serial;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO.Ports;
@@ -141,7 +142,7 @@ namespace ModbusTemperature
                         ModelDetail detail = new ModelDetail(serialNumber.SerialNumber, temperature);
                         detail.SaveDataDetail();
                     }
-                    var details = GetDataFromInterval(interval,masterModels.First().SerialNumber);
+                    var details = GetDataFromInterval(interval, masterModels.First().SerialNumber);
                     details = details.TakeLast(10).ToList();
 
                     LoadDataDetailToChart(details, masterModels.First());
